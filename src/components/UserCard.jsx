@@ -23,7 +23,7 @@ const UserCard = ({
           className="sm:min-w-20 sm:max-w-24 h-fit min-w-18 max-w-20 rounded-full"
         />
       </div>
-      <div className="flex flex-col w-fit pe-5 max-w-full md:max-w-full sm:w-full">
+      <div className="flex container flex-col pe-5">
         <div className="flex flex-col sm:flex-row justify-around mt-5 sm:justify-between sm:w-full w-full">
           <span className="text-black font-mono font-bold text-2xl dark:text-white w-fit">
             {name}
