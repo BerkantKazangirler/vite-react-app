@@ -8,6 +8,7 @@ const ENUMS = {
   NOT_FOUND: "User Not Found",
   SAME_USER: "Aynı user gardaşk!",
   API_ERROR: "Apide sorun var",
+  EMPTY: "Boş bırakmayınız",
 };
 
 function App() {
@@ -22,15 +23,21 @@ function App() {
   };
   const [error, setError] = useState(undefined);
   async function onSubmit() {
+    if (search == "" || search == " ") {
+      toast.warn(ENUMS.EMPTY);
+      return;
+    }
     if (userInfo && search === userInfo.login) {
       toast.error(ENUMS.SAME_USER);
       return;
     }
     console.log(search);
     setLoading(true);
-    const response = await fetch("https://api.github.com/users/" + search).then(
-      (res) => res.json()
-    );
+    const response = await fetch("https://api.github.com/users/" + search, {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+      },
+    }).then((res) => res.json());
     setLoading(false);
     if (response.status === "404") {
       setError(response.message);
@@ -62,13 +69,13 @@ function App() {
             className="flex justify-center h-fit"
             onClick={() => toggleTheme()}
           >
-            <p className="text-sky-700 font-light text-sm dark:text-white">
-              DARK
-            </p>
             <img
-              src="https://kunalshakya.github.io/GitHub-User-Search-App/assets/icon-moon.svg"
+              src={`https://kunalshakya.github.io/GitHub-User-Search-App/assets/${
+                dark ? "icon-sun" : "icon-moon"
+              }.svg`}
+              /* https://kunalshakya.github.io/GitHub-User-Search-App/assets/icon-sun.svg */
               className="ml-2 h-4 w-4 relative top-0.5"
-            ></img>
+            />
           </button>
         </div>
         <div className="bg-zinc-50 flex flex-row justify-around ps-5 pe-2 w-full rounded-2xl dark:bg-slate-700 dark:text-white">
@@ -101,7 +108,7 @@ function App() {
             </button>
           </form>
         </div>
-        {loading && <div>Loading....</div>}
+        {loading && <div className="dark:text-white">Loading....</div>}
         {userInfo !== undefined && (
           <UserCard
             avatar_url={userInfo.avatar_url}
