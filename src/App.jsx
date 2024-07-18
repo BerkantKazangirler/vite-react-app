@@ -58,7 +58,7 @@ function App() {
   }
 
   return (
-    <div className="w-screen h-screen bg-slate-100 transition-colors duration-500 ease-out p-5 md:p-0 dark:bg-slate-800">
+    <div className="max-w-100vh bg-slate-100 h-screen transition-colors duration-500 ease-out p-5 md:p-0 dark:bg-slate-800">
       <div className="flex items-center flex-col w-auto m-auto container h-auto max-w-256">
         <div className="flex flex-row justify-between pt-16 pb-8 w-full">
           <h1 className="font-semibold font-mono text-xl text-sky-900 dark:text-white">
@@ -73,7 +73,6 @@ function App() {
               src={`https://kunalshakya.github.io/GitHub-User-Search-App/assets/${
                 dark ? "icon-sun" : "icon-moon"
               }.svg`}
-              /* https://kunalshakya.github.io/GitHub-User-Search-App/assets/icon-sun.svg */
               className="ml-2 h-4 w-4 relative top-0.5"
             />
           </button>
@@ -90,12 +89,11 @@ function App() {
             <img
               src="https://kunalshakya.github.io/GitHub-User-Search-App/assets/icon-search.svg"
               className="w-7 h-fit relative top-3"
-            ></img>
+            />
             <input
               type="text"
               placeholder="Search GitHub Username..."
               className="bg-transparent border-none focus-visible:outline-none w-full ml-5 font-mono text-opacity-55"
-              id="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             ></input>
