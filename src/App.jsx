@@ -1,7 +1,12 @@
 import { useState } from "react";
 import UserCard from "./components/UserCard";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  const notifyayni = () => toast.error("Aynı user gardaşk!");
+  const notifynotfound = () => toast.warn("User not found!");
   const [search, setSearch] = useState("");
   const [userInfo, setUserInfo] = useState();
   const [loading, setLoading] = useState(false);
@@ -12,10 +17,9 @@ function App() {
     document.body.classList.toggle("dark");
   };
   const [error, setError] = useState(undefined);
-
   async function onSubmit() {
     if (userInfo && search === userInfo.login) {
-      alert("aynı userk kardeş");
+      notifyayni();
       return;
     }
     console.log(search);
@@ -26,6 +30,7 @@ function App() {
     setLoading(false);
     if (response.status === "404") {
       setError(response.message);
+      notifynotfound();
       return;
     }
     setError(undefined);
@@ -105,6 +110,7 @@ function App() {
         {loading && <div>Loading....</div>}
         {error && <div>{error} </div>}
       </div>
+      <ToastContainer />;
     </div>
   );
 }

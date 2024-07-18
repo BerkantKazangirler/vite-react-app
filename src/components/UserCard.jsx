@@ -95,7 +95,7 @@ const UserCard = ({
             </span>
           </div>
           <a
-            href={twitter_username ? "www.x.com/" + twitter_username : "#"}
+            href={twitter_username ? "www.x.com/" + twitter_username : ""}
             className="flex flex-row w-fit"
             target="_blank"
           >
