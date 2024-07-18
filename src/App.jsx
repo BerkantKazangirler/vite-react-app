@@ -4,9 +4,13 @@ import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
+const ENUMS = {
+  NOT_FOUND: "User Not Found",
+  SAME_USER: "Aynı user gardaşk!",
+  API_ERROR: "Apide sorun var",
+};
+
 function App() {
-  const notifyayni = () => toast.error("Aynı user gardaşk!");
-  const notifynotfound = () => toast.warn("User not found!");
   const [search, setSearch] = useState("");
   const [userInfo, setUserInfo] = useState();
   const [loading, setLoading] = useState(false);
@@ -19,7 +23,7 @@ function App() {
   const [error, setError] = useState(undefined);
   async function onSubmit() {
     if (userInfo && search === userInfo.login) {
-      notifyayni();
+      toast.error(ENUMS.SAME_USER);
       return;
     }
     console.log(search);
@@ -30,10 +34,17 @@ function App() {
     setLoading(false);
     if (response.status === "404") {
       setError(response.message);
-      notifynotfound();
+      toast.warn(ENUMS.NOT_FOUND);
       return;
     }
     setError(undefined);
+    if (
+      response.documentation_url ==
+      "https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"
+    ) {
+      toast.error(ENUMS.API_ERROR);
+      return;
+    }
     setUserInfo(response);
     console.log(response);
     console.log(userInfo);
@@ -90,6 +101,7 @@ function App() {
             </button>
           </form>
         </div>
+        {loading && <div>Loading....</div>}
         {userInfo !== undefined && (
           <UserCard
             avatar_url={userInfo.avatar_url}
@@ -107,10 +119,9 @@ function App() {
             blog={userInfo.blog}
           />
         )}
-        {loading && <div>Loading....</div>}
-        {error && <div>{error} </div>}
+        {/* {error && <div>{error} </div>} */}
       </div>
-      <ToastContainer />;
+      <ToastContainer />
     </div>
   );
 }
