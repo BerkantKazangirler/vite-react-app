@@ -23,8 +23,8 @@ const UserCard = ({
           className="sm:min-w-20 sm:max-w-24 h-fit min-w-18 max-w-20 rounded-full"
         />
       </div>
-      <div className="flex flex-col w-fit pe-5 max-w-32 sm:w-full">
-        <div className="flex flex-col sm:flex-row justify-around mt-5 sm:justify-between sm:w-full w-fit">
+      <div className="flex flex-col w-fit pe-5 max-w-full md:max-w-full sm:w-full">
+        <div className="flex flex-col sm:flex-row justify-around mt-5 sm:justify-between sm:w-full w-full">
           <span className="text-black font-mono font-bold text-2xl dark:text-white w-fit">
             {name}
           </span>
@@ -51,7 +51,7 @@ const UserCard = ({
             {bio ? bio : "-"}
           </span>
         </div>
-        <div className="bg-gray-400/30 rounded-2xl p-4 mt-5 w-75 relative -left-32 md:-left-0 container dark:bg-slate-900">
+        <div className="bg-gray-400/30 rounded-2xl p-4 mt-5 md:w-max relative -left-32 md:-left-0 container dark:bg-slate-900">
           <div className="flex flex-row gap-5 sm:gap-32">
             <div className="flex flex-col ml-2 sm:ml-8">
               <p className="font-mono">Repos</p>
@@ -67,7 +67,7 @@ const UserCard = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-0 mt-6 w-fit relative -left-32 sm:w-full justify-between">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-0 mt-6 w-fit relative -left-32 md:-left-0 sm:w-full justify-between">
           <div className="flex flex-row w-fit">
             <img
               src="https://kunalshakya.github.io/GitHub-User-Search-App/assets/icon-location.svg"
@@ -91,7 +91,7 @@ const UserCard = ({
             </span>
           </a>
         </div>
-        <div className="flex flex-col sm:flex-row mt-6 gap-3 sm:gap-0 w-fit relative -left-32 sm:w-full justify-between">
+        <div className="flex flex-col sm:flex-row mt-6 gap-3 sm:gap-0 w-fit relative -left-32 md:-left-0 sm:w-full justify-between">
           <a
             href={blog ? "www." + blog : ""}
             className="flex w-fit flex-row"
